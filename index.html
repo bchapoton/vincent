@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 60px 80px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .time-display {
+            font-size: 72px;
+            font-weight: bold;
+            color: white;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .separator {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="time-display">il est <span class="time-display" id="time1">--:--:--</span> chez toi</span>
+        <div class="separator"></div>
+        <span class="time-display">il est <span class="time-display" id="time2">--:--:--</span> chez moi</span>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+
+            // Heure métropole
+            const metropoleTime = now.toLocaleTimeString('fr-FR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'Europe/Paris'
+            });
+
+            // Heure Réunion
+            const reunionTime = now.toLocaleTimeString('fr-FR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'Indian/Reunion'
+            });
+
+            document.getElementById('time1').textContent = metropoleTime;
+            document.getElementById('time2').textContent = reunionTime;
+        }
+
+        // Mettre à jour immédiatement
+        updateTime();
+
+        // Mettre à jour chaque seconde
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
